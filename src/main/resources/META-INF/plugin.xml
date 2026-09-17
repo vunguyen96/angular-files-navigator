@@ -1,0 +1,110 @@
+<idea-plugin>
+    <id>com.vna.angularfilesnavigator</id>
+    <name>Angular Files Navigator</name>
+    <version>1.1.0</version>
+    <vendor url="https://github.com/vunguyen96/angular-files-navigator">VNA</vendor>
+
+    <!-- Pure platform dependency: works in IntelliJ IDEA, WebStorm, PhpStorm, etc. -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <description><![CDATA[
+        <h2>Angular Files Navigator</h2>
+        <p>
+            Jump instantly between the files that make up an Angular building block.
+            Put the caret in any file of a component or NgRx feature and press
+            <b>Ctrl+Alt+A</b> ("A" for Angular). A popup opens next to the caret
+            listing every related file that exists.
+        </p>
+        <p>
+            <img src="https://raw.githubusercontent.com/vunguyen96/angular-files-navigator/main/docs/angular-files-navigator-demo.gif" alt="Angular Files Navigator demo" width="720"/>
+        </p>
+        <p>From the popup, press the letter mnemonic to open a file, or use the
+           arrow keys and Enter:</p>
+        <ul>
+            <li><b>T</b> &rarr; component <b>T</b>ypeScript (<code>*.component.ts</code> / <code>*.ts</code>; from a spec, the matching source)</li>
+            <li><b>H</b> &rarr; template <b>H</b>tml (<code>*.component.html</code> / <code>*.html</code>)</li>
+            <li><b>S</b> &rarr; <b>S</b>tyles (<code>*.scss</code> / <code>*.sass</code> / <code>*.less</code> / <code>*.css</code>)</li>
+            <li><b>U</b> &rarr; <b>U</b>nit test (<code>*.spec.ts</code>; from a spec, toggles back to source)</li>
+            <li><b>R</b> &rarr; NgRx <b>R</b>educer</li>
+            <li><b>E</b> &rarr; NgRx <b>E</b>ffects</li>
+            <li><b>L</b> &rarr; NgRx se<b>L</b>ectors</li>
+            <li><b>A</b> &rarr; NgRx <b>A</b>ctions</li>
+            <li><b>F</b> &rarr; NgRx <b>F</b>acade</li>
+            <li><b>M</b> &rarr; <b>M</b>odule</li>
+        </ul>
+        <p>Every command also lives under the editor context menu (<i>Angular Files Navigator</i>)
+           and can be bound to its own shortcut under <i>Settings &rarr; Keymap &rarr; Angular Files Navigator</i>.</p>
+        <p>Open source under the MIT License. Contributions are welcome at
+           <a href="https://github.com/vunguyen96/angular-files-navigator">github.com/vunguyen96/angular-files-navigator</a>.</p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <ul>
+            <li><b>1.1.0</b> &ndash; <b>Ctrl+Alt+A</b> now opens a popup near the caret listing the related files; press a letter or use arrows to pick. Pressing <b>T</b> from a <code>*.spec.ts</code> now opens its implementation source.</li>
+            <li><b>1.0.0</b> &ndash; Initial release: navigation between Angular component and NgRx related files.</li>
+        </ul>
+    ]]></change-notes>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Angular Files Navigator" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="AngularFilesNavigator.ShowPopup"
+                class="com.vna.angularfilesnavigator.action.ShowRelatedFilesPopupAction"
+                text="Angular Files Navigator: Related Files..."
+                description="Show a popup with the related Angular files for the current file">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt A"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+
+        <group id="AngularFilesNavigator.Group" text="Angular Files Navigator" description="Navigate between Angular related files" popup="true">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+
+            <action id="AngularFilesNavigator.GoToComponentTs"
+                    class="com.vna.angularfilesnavigator.action.GoToComponentTsAction"
+                    text="Go to Component (.ts)"
+                    description="Open the component TypeScript file"/>
+            <action id="AngularFilesNavigator.GoToTemplate"
+                    class="com.vna.angularfilesnavigator.action.GoToTemplateAction"
+                    text="Go to Template (.html)"
+                    description="Open the component HTML template"/>
+            <action id="AngularFilesNavigator.GoToStyles"
+                    class="com.vna.angularfilesnavigator.action.GoToStylesAction"
+                    text="Go to Styles (.scss/.less/.css)"
+                    description="Open the component stylesheet"/>
+            <action id="AngularFilesNavigator.GoToSpec"
+                    class="com.vna.angularfilesnavigator.action.GoToSpecAction"
+                    text="Go to Unit Test (.spec.ts)"
+                    description="Open the unit test file"/>
+
+            <separator/>
+
+            <action id="AngularFilesNavigator.GoToReducer"
+                    class="com.vna.angularfilesnavigator.action.GoToReducerAction"
+                    text="Go to NgRx Reducer"
+                    description="Open the NgRx reducer file"/>
+            <action id="AngularFilesNavigator.GoToEffects"
+                    class="com.vna.angularfilesnavigator.action.GoToEffectsAction"
+                    text="Go to NgRx Effects"
+                    description="Open the NgRx effects file"/>
+            <action id="AngularFilesNavigator.GoToSelectors"
+                    class="com.vna.angularfilesnavigator.action.GoToSelectorsAction"
+                    text="Go to NgRx Selectors"
+                    description="Open the NgRx selectors file"/>
+            <action id="AngularFilesNavigator.GoToActions"
+                    class="com.vna.angularfilesnavigator.action.GoToActionsAction"
+                    text="Go to NgRx Actions"
+                    description="Open the NgRx actions file"/>
+            <action id="AngularFilesNavigator.GoToFacade"
+                    class="com.vna.angularfilesnavigator.action.GoToFacadeAction"
+                    text="Go to NgRx Facade"
+                    description="Open the NgRx facade file"/>
+            <action id="AngularFilesNavigator.GoToModule"
+                    class="com.vna.angularfilesnavigator.action.GoToModuleAction"
+                    text="Go to Module"
+                    description="Open the Angular module file"/>
+        </group>
+    </actions>
+</idea-plugin>
