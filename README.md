@@ -1,5 +1,11 @@
 # Angular Files Navigator
 
+This repository contains the shared Angular file-navigation experience for
+IntelliJ-based IDEs and Visual Studio Code:
+
+- `intellij/` - the IntelliJ Platform plugin, built with Gradle.
+- `vscode/` - the Visual Studio Code extension, built with npm and TypeScript.
+
 An open-source IntelliJ Platform plugin for navigating between the files that
 make up an Angular component or NgRx feature.
 
@@ -71,15 +77,15 @@ Clone the repository and build the plugin:
 ```bash
 git clone https://github.com/vunguyen96/angular-files-navigator.git
 cd angular-files-navigator
-./gradlew buildPlugin
+./gradlew :intellij:buildPlugin
 ```
 
-The installable ZIP is generated in `build/distributions/`.
+The installable ZIP is generated in `intellij/build/distributions/`.
 
 To launch a sandbox IDE with the plugin installed:
 
 ```bash
-./gradlew runIde
+./gradlew :intellij:runIde
 ```
 
 On Windows, use `gradlew.bat` instead of `./gradlew`.
@@ -106,19 +112,48 @@ Please follow the project's [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md).
 Security reports should follow [`SECURITY.md`](SECURITY.md) rather than being
 posted publicly.
 
+## Visual Studio Code
+
+Install dependencies and compile the VS Code extension:
+
+```bash
+cd vscode
+npm install
+npm run compile
+```
+
+Create an installable VS Code package:
+
+```bash
+npm run package
+```
+
+This writes `vscode/angular-files-navigator-1.1.0.vsix`. Install it from the
+VS Code Extensions view using **... -> Install from VSIX...**, or with:
+
+```bash
+code --install-extension angular-files-navigator-1.1.0.vsix
+```
+
+Run the extension from VS Code by opening `vscode/` and pressing `F5`.
+The command **Angular Files Navigator: Related Files** is available from the
+editor context menu and the Command Palette. `Ctrl+Alt+A` opens the related-file
+search bar, where you can filter the recommendations and press **Enter** to
+open one.
+
 ## Project structure
 
 ```text
-src/main/kotlin/       Plugin implementation
-src/main/resources/    Plugin descriptor and icons
-build.gradle.kts       Gradle and IntelliJ Platform configuration
+intellij/              IntelliJ Platform module
+vscode/                Visual Studio Code module
+build.gradle.kts       Gradle multi-module entry point
 PUBLISHING.md          Marketplace publishing instructions
 ```
 
 ## Publishing
 
-Instructions for signing and publishing releases to the JetBrains Marketplace
-are in [`PUBLISHING.md`](PUBLISHING.md).
+Instructions for publishing releases to both the JetBrains Marketplace and the
+Visual Studio Marketplace are in [`PUBLISHING.md`](PUBLISHING.md).
 
 ## License
 

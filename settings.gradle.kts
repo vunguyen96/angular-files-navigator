@@ -6,3 +6,4 @@ pluginManagement {
 }
 
 rootProject.name = "angular-files-navigator"
+include(":intellij")

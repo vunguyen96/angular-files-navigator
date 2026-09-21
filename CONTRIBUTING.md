@@ -39,8 +39,9 @@ adding a feature.
 
 ## Making changes
 
-- Keep changes focused and consistent with the existing Kotlin and Gradle
-  conventions.
+- Keep changes focused and consistent with the existing Kotlin, TypeScript, and
+  Gradle conventions. IntelliJ-specific code belongs in `intellij/`; VS Code
+  code belongs in `vscode/`.
 - Preserve compatibility with IntelliJ Platform build `233` and newer unless
   the change intentionally updates that support policy.
 - Prefer clear names and small, reusable functions.

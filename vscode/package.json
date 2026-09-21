@@ -1,0 +1,64 @@
+{
+  "name": "angular-files-navigator",
+  "displayName": "Angular Files Navigator",
+  "description": "Navigate between related Angular and NgRx files.",
+  "version": "1.1.0",
+  "publisher": "vna",
+  "license": "MIT",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vunguyen96/angular-files-navigator.git"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:angularFilesNavigator.showRelatedFiles"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "angularFilesNavigator.showRelatedFiles",
+        "title": "Angular Files Navigator: Related Files..."
+      },
+      {
+        "command": "angularFilesNavigator.goToRole",
+        "title": "Angular Files Navigator: Go to Related File"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "angularFilesNavigator.showRelatedFiles",
+        "key": "ctrl+alt+a",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "angularFilesNavigator.showRelatedFiles",
+          "group": "navigation@10",
+          "when": "editorTextFocus"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "npm run compile",
+    "package": "npm run compile && vsce package",
+    "publish": "npm run compile && vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.3",
+    "@vscode/vsce": "^3.6.0"
+  }
+}
